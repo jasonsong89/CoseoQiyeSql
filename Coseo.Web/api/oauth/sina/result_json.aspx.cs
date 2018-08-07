@@ -55,7 +55,6 @@ namespace Coseo.Web.api.oauth.sina
             }
             str.Append("\"birthday\": \"\"");
             str.Append("}");
-
             Response.Write(str.ToString());
             return;
         }
