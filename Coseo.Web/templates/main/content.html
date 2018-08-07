@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{model.title}-{config.webname}</title>
+    <meta content="{config.webkeyword}" name="keywords" />
+    <meta content="{config.webdescription}" name="description" />
+    <link href="<%templateskin%>/css/style.css" rel="stylesheet" type="text/css"/>    
+    <script type="text/javascript" src="{config.webpath}scripts/jquery/jquery-1.10.2.min.js"></script>    
+    <script type="text/javascript" src="<%templateskin%>/js/global.js"></script>    
+    <script type="text/javascript" src="<%templateskin%>/js/jquery.SuperSlide.2.1.1.js"></script>
+
+    <!--[if IE 7]> 
+	    <link href="<%templateskin%>/css/IE7.css" rel="stylesheet" type="text/css" media="all" />
+    <![endif]-->
+    
+    <!--[if IE 6]>
+    	<script type="text/javascript" src="<%templateskin%>/js/DD_belatedPNG.js"></script>
+        <script>
+          /* EXAMPLE */
+          DD_belatedPNG.fix('*');
+        </script>
+	<![endif]-->    
+    <script type="text/javascript">
+        $(function () {
+            $("#content{model.id}").addClass("cur");
+        });
+    </script>    
+</head>
+
+<body>
+    <%template src="_header.html"%>
+    <div class="container">        
+        <!-- banner -->
+        <%if model.call_index=="about"||model.call_index=="culture"||model.call_index=="marketing"%>
+        <script type="text/javascript">
+            var ind = 1;
+        </script>
+        <div class="banner img_1"></div>
+        <%else if model.call_index=="video"%>
+        <script type="text/javascript">
+            var ind = 4;
+        </script>
+        <div class="banner img_2"></div>
+        <%else if model.call_index=="contact"%>
+        <script type="text/javascript">
+            var ind = 6;
+        </script>
+        <div class="banner img_3"></div>
+        <%/if%>        
+        <!-- main -->        
+        <div id="main">
+            <div class="left">
+                <div id="sitemap">            
+                    <i class="iconfont icon-home"></i>
+                    <a href="<%linkurl("index")%>">首页</a>
+                    <i class="iconfont icon-arrow"></i>
+                    富乔鑫科技
+                    <i class="iconfont icon-arrow"></i>
+                    {model.title}
+                </div>
+                <div id="content-list">
+                    {model.content}
+                </div>
+            </div>
+            <div class="right">
+                <%template src="_menu_article.html"%>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <%template src="_footer.html"%>
+    </div>    
+</body>
+</html>

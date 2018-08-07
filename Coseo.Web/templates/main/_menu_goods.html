@@ -1,0 +1,28 @@
+﻿<div class="aside-headline">
+    <h2>
+        <p class="en">category</p>
+        <i>&nbsp;</i>
+        <p class="cn">产品系列</p>
+    </h2>
+</div>
+<ul id="menu">
+    <%set DataTable category=get_category_child_list("goods", 0)%> 
+    <%loop cdr category%>    
+    <li>
+        <a href="<%linkurl("goods",{cdr[id]})%>" id="goods{cdr[id]}">{cdr[title]}</a>
+        <%set DataTable sub_goods=get_category_child_list("goods", {strtoint({cdr[id]})})%>
+        <%if(sub_goods.Rows.Count>0)%>
+        <ul>            
+            <%loop cdr3 sub_goods%>
+            <li><a href="<%linkurl("goods",{cdr3[id]})%>">{cdr3[title]}</a></li>
+            <%/loop%>
+        </ul>
+        <%/if%>
+    </li>
+    <%/loop%>
+</ul>
+<div class="aside-service">
+    <h3>hotline</h3>
+    <p>{config.webtel}</p>
+</div>
+<script type="text/javascript" src="<%templateskin%>/js/draw_menu.js"></script>

@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{config.webtitle}</title>
+    <meta content="{config.webkeyword}" name="keywords" />
+    <meta content="{config.webdescription}" name="description" />
+    <link href="<%templateskin%>/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="<%templateskin%>/css/focus.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="{config.webpath}tools/browser_redirect.ashx"></script>
+    <script type="text/javascript" src="{config.webpath}scripts/jquery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="<%templateskin%>/js/global.js"></script>
+    <script type="text/javascript" src="<%templateskin%>/js/jquery.SuperSlide.2.1.1.js"></script>
+    <script type="text/javascript" src="<%templateskin%>/js/popwin.js"></script>
+    <script type="text/javascript">
+        var ind = 0;
+	</script>
+    <!--[if IE 7]> 
+	    <link href="<%templateskin%>/css/IE7.css" rel="stylesheet" type="text/css" media="all" />
+    <![endif]-->
+    
+    <!--[if IE 6]>
+    	<script type="text/javascript" src="<%templateskin%>/js/DD_belatedPNG.js"></script>
+        <script>
+          /* EXAMPLE */
+          DD_belatedPNG.fix('*');
+        </script>
+	<![endif]-->    
+</head>
+
+<body>
+    <%template src="_header.html"%>
+    <div id="container">        
+        <!-- focus -->
+        <div class="focus">
+            <div class="flicking_btn">
+                <div class="flicking_inner">
+                    <a href="#">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+               	 </div>
+            </div>
+			<div class="focus_item">
+				<ul>					
+					<li><span class="img_01"></span></li>
+					<li><span class="img_02"></span></li>
+					<li><span class="img_03"></span></li>					
+				</ul>
+				<a href="javascript:;" id="btn_prev"></a>
+				<a href="javascript:;" id="btn_next"></a>
+			</div>
+		</div>       
+        <!-- main -->
+        <div id="grids">
+            <ul>
+                <li>
+                    <div class="pic"></div>
+                    <h2>关于富乔鑫</h2>
+                    <p>
+                        <%=get_article_field("about","call_home")%>
+                    </p>
+                    <a class="more" href="<%linkurl("content","about")%>"></a>
+                </li>
+                <li>
+                    <div class="pic col2"></div>
+                    <h2>企业文化</h2>
+                    <p>
+                        <%=get_article_field("culture","call_home")%>
+                    </p>
+                    <a class="more" href="<%linkurl("content","culture")%>"></a>
+                </li>
+                <li>
+                    <div class="pic col3"></div>
+                    <h2>联系我们</h2>
+                    <p>
+                        <%=get_article_field("contact","call_home")%>
+                    </p>
+                    <a class="more" href="<%linkurl("content","contact")%>"></a>
+                </li>
+            </ul>
+        </div>
+        <div class="wrapper bg_gray">
+            <div id="news_wrap">
+                <div id="news">
+                    <div class="left">
+                        <h2>news</h2>
+                        <h3>最新资讯</h3>
+                        <a href="<%linkurl("news")%>" class="more">查看详情</a>
+                    </div>
+                    <div class="right">
+                        <%set DataTable top_news=get_article_list("news", 0, 1, "status=0 and is_top=1")%>
+                        <%foreach(DataRow dr in top_news.Rows)%>
+                        <div class="is_top">
+                            <div class="pic">
+                                <img src="{dr[img_url]}" alt="{dr[title]}" />
+                            </div>
+                            <div class="box">
+                                <h2>
+                                    <a href="javascript:void(0)" name="<%linkurl("news_show",{dr[id]})%>" title="{dr[title]}">
+                                        <%cutstring({dr[title]},40)%>
+                                    </a>
+                                </h2>
+                                <p><%cutstring({dr[zhaiyao]},100)%></p>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <%/foreach%>
+                        <div class="is_red">
+                            <ul>
+                                <%set DataTable red_news=get_article_list("news", 0, 3, "status=0 and is_red=1")%>
+                                <%foreach(DataRow dr in red_news.Rows)%>
+                                <li>
+                                    <a href="javascript:void(0)" name="<%linkurl("news_show",{dr[id]})%>" title="{dr[title]}">
+                                        <%cutstring({dr[title]},50)%>
+                                    </a>
+                                    <span><%datetostr({dr[add_time]},yyyy-MM-dd)%></span>
+                                </li>
+                                <%/foreach%>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div id="btnlk">
+                    <ul>
+                        <li>
+                            <div class="pic"></div>
+                            <a href="<%linkurl("content","advantage")%>" class="box">
+                                <h2>视频专区</h2>
+                                <p><%=get_article_field("video","call_home")%></p>
+                            </a>
+                            <div class="clear"></div>
+                        </li>
+                        <li>
+                            <div class="pic col_2"></div>
+                            <a href="<%linkurl("content","marketing")%>" class="box">
+                                <h2>营销网络</h2>
+                                <p><%=get_article_field("marketing","call_home")%></p>
+                            </a>
+                            <div class="clear"></div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="wrapper">
+            <div class="headlines">
+                <h2>products</h2>
+                <p>产品推介</p>
+            </div>            
+            <div id="goods">
+                <div id="wrapBox1" class="wrapBox">
+                    <ul id="count1" class="count clearfix">
+                        <%set DataTable red_goods=get_article_list("goods", 0, 12, "status=0 and is_red=1")%>
+                        <%foreach(DataRow dr in red_goods.Rows)%>
+                        <li>
+                            <a href="javascript:void(0)" name="<%linkurl("goods_show",{dr[id]})%>" title="{dr[title]}" class="img_wrap">
+                                <img src="{dr[img_url]}" alt="{dr[title]}" />
+                                <p class="cover caption">{dr[title]}</p>
+                            </a>
+                        </li>
+                        <%/foreach%>
+                    </ul>
+                </div>
+                <a id="right1" class="prev arrows"></a>
+                <a id="left1" class="next arrows"></a>
+            </div>
+            <a id="goods_more" href="<%linkurl("goods")%>">查看更多</a>
+        </div>
+        <%template src="_footer.html"%>
+    </div>
+</body>
+</html>

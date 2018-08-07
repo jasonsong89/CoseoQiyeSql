@@ -1,0 +1,63 @@
+﻿<script type="text/javascript" src="<%templateskin%>/js/base.js"></script>
+<div id="header">    
+    <div class="header">
+        <a class="left" href="<%linkurl("index")%>"></a>
+        <div class="right">
+            <div class="text_box">
+                <div id="search">
+                    <input id="keywords" name="keywords" class="keywords" type="text" x-webkit-speech="" placeholder="输入回车搜索" onkeydown="if(event.keyCode==13){SiteSearch('<%linkurl("search")%>', '#keywords');return false};" />
+                    <input class="submit" type="submit" value="" onclick="SiteSearch('<%linkurl("search")%>', '#keywords');" />
+                </div>
+            </div>
+            <div class="nav_box">
+                <div class="navBar">
+                    <ul class="nav clearfix">
+                        <li class="m">
+                            <h3><a href="<%linkurl("index")%>">网站首页</a></h3>
+                        </li>
+                        <li class="s">|</li>
+                        <li class="m on">
+                            <h3><a href="<%linkurl("content","about")%>">关于富乔鑫</a></h3>
+                            <ul class="sub">
+                                <%set DataTable dl_info=get_article_list("content", 0, 0, "status=0 and is_red=1")%>
+                                <%foreach(DataRow dr in dl_info.Rows)%>
+                                <%if({dr[call_index]}!="contact"&&{dr[call_index]}!="video")%>
+                                <li><a href="<%linkurl("content",{dr[call_index]})%>">{dr[title]}</a></li>
+                                <%/if%>
+                                <%/foreach%>
+                            </ul>
+                        </li>
+                        <li class="s">|</li>
+                        <li class="m">
+                            <h3><a href="<%linkurl("goods")%>">产品中心</a></h3>                            
+                        </li>
+                        <li class="s">|</li>
+                        <li class="m">
+                            <h3><a href="<%linkurl("news")%>">新闻动态</a></h3>
+                            <ul class="sub">                                
+                                <%set DataTable category_list2=get_category_child_list("news", 0)%> 
+                                <%loop cdr2 category_list2%>
+                                <li><a href="<%linkurl("news",{cdr2[id]})%>">{cdr2[title]}</a></li>
+                                <%/loop%>
+                            </ul>
+                        </li>                    
+                        <li class="s">|</li>
+                        <li class="m">
+                            <h3><a href="<%linkurl("content","video")%>">视频专区</a></h3>                            
+                        </li>
+                        <li class="s">|</li>
+                        <li class="m">
+                            <h3><a href="<%linkurl("feedback")%>">客户反馈</a></h3>                            
+                        </li>
+                        <li class="s">|</li>
+                        <li class="m">
+                            <h3><a href="<%linkurl("content","contact")%>">联系我们</a></h3>
+                        </li> 
+                        <li class="block" ></li>
+                    </ul>
+                  </div>
+                <div class="clear"></div>
+            </div>
+        </div>            
+    </div>        
+</div>

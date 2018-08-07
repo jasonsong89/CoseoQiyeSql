@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>    
+    <title>产品搜索-{config.webname}</title>
+    <meta content="{config.webkeyword}" name="keywords" />
+    <meta content="{config.webdescription}" name="description" />
+    <link href="<%templateskin%>/css/style.css" rel="stylesheet" type="text/css"/>    
+    <script type="text/javascript" src="{config.webpath}scripts/jquery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="<%templateskin%>/js/global.js"></script>
+    <script type="text/javascript" src="<%templateskin%>/js/jquery.SuperSlide.2.1.1.js"></script>
+    <script type="text/javascript" src="<%templateskin%>/js/popwin.js"></script>
+    <!--[if IE 7]> 
+	    <link href="<%templateskin%>/css/IE7.css" rel="stylesheet" type="text/css" media="all" />
+    <![endif]-->
+    
+    <!--[if IE 6]>
+    	<script type="text/javascript" src="<%templateskin%>/js/DD_belatedPNG.js"></script>
+        <script>
+          /* EXAMPLE */
+          DD_belatedPNG.fix('*');
+        </script>
+	<![endif]-->
+    <script type="text/javascript">
+        var ind = 2;
+    </script>
+
+</head>
+
+<body>
+    <%template src="_header.html"%>
+    <div class="container">        
+        <!-- banner -->
+        <div class="banner img_3"></div>
+        <!-- main -->                
+        <div id="main">
+            <div class="left">
+                <div id="sitemap">            
+                    <i class="iconfont icon-home"></i>
+                    <a href="<%linkurl("index")%>">首页</a>
+                    <i class="iconfont icon-arrow"></i>
+                    产品展示                    
+                    <i class="iconfont icon-arrow"></i>
+                    产品搜索
+                </div>
+                <%set DataTable list=get_search_list(15, out totalcount)%> <!--取得一个DataTable-->
+	            <%set string pagelist=get_page_link(15, page, totalcount, linkurl("search","?channel_name="+channel_name+"&keyword=" + Server.UrlEncode(keyword) + "&page=__id__"))%> <!--取得分页页码列表-->
+                <div id="goods_list">
+                    <ul>
+                        <%loop dr list%>
+                        <li>
+                            <a href="javascript:void(0)" class="img" name="{dr[link_url]}" title="{dr[title]}">
+                                <img src="{dr[img_url]}" alt="{dr[title]}" />
+                                <p class="cover caption">{dr[title]}</p>
+                                <p class="zoom"></p>
+                            </a>
+                        </li> 
+                        <%/loop%>
+                    </ul>
+                </div>
+                <div class="pages">{pagelist}</div>
+            </div>
+            <div class="right">
+                <%template src="_menu_goods.html"%>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <%template src="_footer.html"%>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#goods_list ul li').hover(function () {
+                $(".cover", this).stop().animate({ bottom: '0px' }, { queue: false, duration: 110 });
+                $(".zoom", this).stop().animate({ top: '40px' }, { queue: false, duration: 200 });
+            }, function () {
+                $(".cover", this).stop().animate({ bottom: '-50px' }, { queue: false, duration: 110 });
+                $(".zoom", this).stop().animate({ top: '-50px' }, { queue: false, duration: 200 });
+            });
+        });
+    </script>
+</body>
+</html>

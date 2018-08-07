@@ -1,0 +1,15 @@
+﻿<div class="aside-headline ipage">
+                    <h2><p class="en">v-Future</p><i>&nbsp;</i><p class="cn">富乔鑫科技</p></h2>
+                </div>
+                <ul id="menu">
+                    <%set DataTable content_list=get_article_list("content", 0, 0, "status=0 and is_red=1")%>
+                    <%foreach(DataRow dr in content_list.Rows)%>
+                    <li>
+                        <a href="<%linkurl("content",{dr[call_index]})%>" id="content{dr[id]}">{dr[title]}</a>
+                    </li>
+                    <%/foreach%>                    
+                </ul>
+                <div class="aside-service">
+                    <h3>hotline</h3>
+                    <p>{config.webtel}</p>
+                </div>

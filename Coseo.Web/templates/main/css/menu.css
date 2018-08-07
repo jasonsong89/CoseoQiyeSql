@@ -1,0 +1,30 @@
+﻿
+/* Nav Cursor */
+/* 光标跟随带下拉导航栏 */
+.navBar { width:718px; height:60px; /*margin-top:5px;*/}
+.nav { position:relative; width:718px;}
+.nav a { color:#333;}
+.nav h3 { font:normal 14px/58px "Arial","Microsoft YaHei"; text-transform:uppercase;}
+/*.nav h3 { font-size:100%; font-weight:normal;}
+.nav h3 p{ font:bold 14px/24px "Microsoft YaHei",SimSun,SimHei; margin-top:10px;}
+.nav h3 span{ font:12px/12px Arial,"Microsoft YaHei",SimSun,SimHei; color:#999; text-transform:uppercase;}*/
+.nav .m { float:left; position:relative; z-index:1;}
+.nav .s { float:left; width:3px; text-align:center; color:#D4D4D4; font-size:12px; line-height:60px;}
+.nav h3 a { display:block; width:100px; text-align:center; /*font-weight:bold;*/}
+.nav .sub { display:none; position:absolute; left:0; top:60px; z-index:1; width:100px; border-bottom:1px solid #E6E4E3;
+            border-top:0; background:#fff;}
+.nav .sub li { text-align:center; width:100px; height:30px; line-height:30px;}
+.nav .sub li a { display:block; border-bottom:1px solid #E6E4E3; color:#666;}
+.nav .sub li a:hover { color:#FE7700;}
+.nav .block { height:3px; width:100px; background:#353535; position:absolute; left:0; top:57px; overflow:hidden;}
+
+/* Draw Back Menu */
+ul#menu, ul#menu ul { list-style-type:none; margin:0; padding:0; width:240px;}
+ul#menu a { display:block; text-decoration:none;}
+ul#menu li { margin-top:1px;}
+ul#menu li a { background:#ecf0f1; color:#666; width:220px !important; width:240px; padding-left:20px; height:50px; font:14px/50px Arial,"Microsoft YaHei"; text-transform:uppercase;}
+ul#menu li a:hover{ background:#BDC3C7; color:#fff;}
+ul#menu li a.cur { background:#bec3c7; color:#fff;}
+
+ul#menu li ul li a { background: #95A5A6; color: #fff; width:220px !important; width:240px;padding-left: 20px; height:50px; font:14px/50px Arial,"Microsoft YaHei";}
+ul#menu li ul li a:hover,ul#menu li ul .current a { background:#7F8C8D; /*border-left:5px #000 solid; padding-left:15px;*/}

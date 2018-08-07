@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <%set string category_title=get_category_title(model.category_id,"产品中心")%>
+    <title>{model.title} - {category_title} - {config.webname}</title>
+    <meta content="{model.seo_keywords}" name="keywords" />
+    <meta content="{model.seo_description}" name="description" />
+    <link href="<%templateskin%>/css/style.css" rel="stylesheet" type="text/css"/>    
+    <script type="text/javascript" src="{config.webpath}scripts/jquery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="<%templateskin%>/js/base.js"></script>
+    <script type="text/javascript" src="<%templateskin%>/js/slide.js"></script>
+    <!--[if IE 7]> 
+	    <link href="<%templateskin%>/css/IE7.css" rel="stylesheet" type="text/css" media="all" />
+    <![endif]-->    
+    <!--[if IE 6]>
+    	<script type="text/javascript" src="<%templateskin%>/js/DD_belatedPNG.js"></script>
+        <script>
+          /* EXAMPLE */
+          DD_belatedPNG.fix('*');
+        </script>
+	<![endif]-->
+</head>
+
+<body style="padding-top:20px;">            
+    <div id="goods_show">
+        <div class="tag">
+            <i class="list">&nbsp;</i>{category_title}
+            <i class="time">&nbsp;</i>{model.add_time}
+            <i class="view">&nbsp;</i><script type="text/javascript" src="{config.webpath}tools/submit_ajax.ashx?action=view_article_click&id={model.id}&click=1"></script>
+        </div>
+        <div class="content">
+            <div class="slide_box">
+                <div id="pic_box" class="pic_box">
+                    <a class="big_prev"></a><a class="big_next"></a>
+                    <div id="pic_show"></div>
+                </div>
+                <div class="scroll_box">
+                    <a class="small_prev"></a><a class="small_next"></a>
+                    <div id="pic_scroll" class="items">
+                        <ul>
+                            <%if(model.albums!=null)%>
+                            <%foreach(Coseo.Model.article_albums modelt in model.albums)%>
+                            <li><a href="javascript:;"><img bimg="{modelt.original_path}" src="{modelt.thumb_path}" /></a></li>
+                            <%/foreach%>
+                            <%/if%>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            {model.content}
+        </div>        
+        <div class="cutline"></div>        
+        <div class="prevnext">
+            <span class="blue">上一条：</span><%=get_prevandnext_article("goods_show", -1, "没有啦！", 0)%><br />
+            <span class="blue">下一条：</span><%=get_prevandnext_article("goods_show", 1, "没有啦！", 0)%>
+        </div> 
+        <div class="share">
+            <%template src="_share.html"%>
+        </div>
+    </div>
+</body>
+</html>

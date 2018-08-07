@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <%set string category_title=get_category_title(model.category_id,"新闻资讯")%>
+    <title>{model.title} - {category_title} - {config.webname}</title>
+    <meta content="{model.seo_keywords}" name="keywords" />
+    <meta content="{model.seo_description}" name="description" />
+    <link href="<%templateskin%>/css/style.css" rel="stylesheet" type="text/css"/>    
+    <script type="text/javascript" src="{config.webpath}scripts/jquery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="<%templateskin%>/js/global.js"></script>
+    <script type="text/javascript" src="<%templateskin%>/js/jquery.SuperSlide.2.1.1.js"></script>
+    <!--[if IE 7]> 
+	    <link href="<%templateskin%>/css/IE7.css" rel="stylesheet" type="text/css" media="all" />
+    <![endif]-->
+    
+    <!--[if IE 6]>
+    	<script type="text/javascript" src="<%templateskin%>/js/DD_belatedPNG.js"></script>
+        <script>
+          /* EXAMPLE */
+          DD_belatedPNG.fix('*');
+        </script>
+	<![endif]-->    
+    <script type="text/javascript">
+        var ind = 3;
+    </script>    
+</head>
+
+<body style="padding-top:20px;">
+    <div id="news_show">
+        <div class="tag">
+            <i class="list">&nbsp;</i>{category_title}
+            <i class="time">&nbsp;</i>{model.add_time}
+            <i class="view">&nbsp;</i><script type="text/javascript" src="{config.webpath}tools/submit_ajax.ashx?action=view_article_click&id={model.id}&click=1"></script>
+        </div>
+       
+        <div class="content">
+            {model.content}
+        </div>
+        <div class="cutline"></div>
+        <div class="prevnext">
+            上一条：<%=get_prevandnext_article("news_show", -1, "没有啦！", 0)%><br />
+            下一条：<%=get_prevandnext_article("news_show", 1, "没有啦！", 0)%>
+        </div>
+        <div class="share mt-20">
+            <%template src="_share.html"%>
+        </div>
+    </div>
+</body>
+</html>

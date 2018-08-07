@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <%csharp%>
+        int page;
+        page = DTRequest.GetQueryInt("page", 1);
+        int category_id;
+        category_id = DTRequest.GetQueryInt("category_id", 0);
+        int totalcount;
+        string pagelist;
+    <%/csharp%>
+    <%set string category_title=get_category_title(category_id,"新闻动态")%>
+    <title><%if category_id!=0%>{category_title}-<%/if%>{config.webtitle}</title>
+    <meta content="{config.webkeyword}" name="keywords" />
+    <meta content="{config.webdescription}" name="description" />
+    <link href="<%templateskin%>/css/style.css" rel="stylesheet" type="text/css"/>    
+    <script type="text/javascript" src="{config.webpath}scripts/jquery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="<%templateskin%>/js/global.js"></script>
+    <script type="text/javascript" src="<%templateskin%>/js/jquery.SuperSlide.2.1.1.js"></script>
+    <script type="text/javascript" src="<%templateskin%>/js/popwin.js"></script>
+    <!--[if IE 7]> 
+	    <link href="<%templateskin%>/css/IE7.css" rel="stylesheet" type="text/css" media="all" />
+    <![endif]-->
+    
+    <!--[if IE 6]>
+    	<script type="text/javascript" src="<%templateskin%>/js/DD_belatedPNG.js"></script>
+        <script>
+          /* EXAMPLE */
+          DD_belatedPNG.fix('*');
+        </script>
+	<![endif]-->
+    <script type="text/javascript">
+        var ind = 3;
+    </script>    
+</head>
+
+<body>
+    <%template src="_header.html"%>
+    <div class="container">        
+        <div class="banner img_2"></div>
+        <!-- main -->        
+        <div id="main">
+            <div class="left">
+                <div id="sitemap">            
+                    <i class="iconfont icon-home"></i>
+                    <a href="<%linkurl("index")%>">首页</a>
+                    <i class="iconfont icon-arrow"></i>
+                    新闻动态
+                    <%if category_id!=0%>
+                    <i class="iconfont icon-arrow"></i>
+                    {category_title}
+                    <%/if%>
+                </div>                
+                <div id="news_list">
+                    <%set DataTable news_list = get_article_list("news", category_id, page, "status=0", out totalcount, out pagelist, "news", category_id, "__id__")%>
+			        <%foreach(DataRow dr in news_list.Rows)%>
+                    <dl>
+                        <dt><a href="javascript:void(0)" name="<%linkurl("news_show",{dr[id]})%>" title="{dr[title]}">{dr[title]}</a></dt>
+                        <dd><%datetostr({dr[add_time]},yyyy年MM月dd日)%></dd>
+                    </dl>
+                    <%/foreach%>
+                </div>
+                <div class="pages">{pagelist}</div>
+            </div>
+            <div class="right">
+                <%template src="_menu_article.html"%>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <%template src="_footer.html"%>
+    </div>    
+</body>
+</html>
