@@ -18,6 +18,8 @@ namespace Coseo.Web.api.oauth.sina
             string state = DTRequest.GetQueryString("state");
             string code = DTRequest.GetQueryString("code");
 
+
+
             string access_token = string.Empty;
             string expires_in = string.Empty;
             string client_id = string.Empty;
